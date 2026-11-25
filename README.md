@@ -187,7 +187,7 @@ releases:
 | ADK215-BUILDER-REMOVED | 2.14.1: `google.adk.cli.built_in_agents` imports | 2.15.0: `ModuleNotFoundError` |
 
 All six error-level rules are reproduced this way. The warning and info rules come from the tagged
-source and changelog, and they never fail CI on their own. A rule is dropped when the break it
+source and changelog, and they don't fail CI by default. A rule is dropped when the break it
 describes doesn't reproduce. The 2.0 notes say overridden `_run_async_impl`
 methods are bypassed, but on the `Runner` path they still run in 1.39.1, 2.0.0 and 2.15.1
 ([`run_override.py`](tests/ground_truth/run_override.py)). So there is no rule for that, because it
