@@ -98,7 +98,7 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v4
-      - uses: Reuben-Alex/adk-upgrade-check@v0.2.0
+      - uses: Reuben-Alex/adk-upgrade-check@v0.2.1
         with:
           to: latest
           sarif: adk-upgrade-check.sarif
@@ -113,7 +113,7 @@ jobs:
 ```yaml
 repos:
   - repo: https://github.com/Reuben-Alex/adk-upgrade-check
-    rev: v0.2.0
+    rev: v0.2.1
     hooks:
       - id: adk-upgrade-check
         args: ["--to", "latest"]
