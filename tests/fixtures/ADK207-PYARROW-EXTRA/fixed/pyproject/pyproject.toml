@@ -1,0 +1,5 @@
+[project]
+name = "analytics-agent"
+dependencies = [
+  "google-adk[gcp,bigquery-analytics]==2.6.3",  # expect
+]

@@ -1,0 +1,7 @@
+- id: adk-upgrade-check
+  name: adk-upgrade-check
+  description: Find code that a google-adk upgrade will break.
+  entry: adk-upgrade-check
+  language: python
+  pass_filenames: false
+  always_run: true

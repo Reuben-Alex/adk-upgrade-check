@@ -1,0 +1,5 @@
+[project]
+name = "analytics-agent"
+dependencies = [
+  "google-adk[gcp]==2.6.3",  # expect
+]

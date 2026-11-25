@@ -1,0 +1,1 @@
+google-adk[gcp,bigquery-analytics]>=2.7

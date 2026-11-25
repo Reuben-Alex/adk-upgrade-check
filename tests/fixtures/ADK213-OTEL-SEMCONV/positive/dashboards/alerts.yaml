@@ -1,0 +1,4 @@
+alerts:
+  - name: slow-model-calls
+    span: call_llm  # expect
+    threshold_ms: 5000

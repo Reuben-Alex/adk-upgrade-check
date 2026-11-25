@@ -1,0 +1,2 @@
+google-adk[gcp]==2.6.3
+pyarrow>=14
