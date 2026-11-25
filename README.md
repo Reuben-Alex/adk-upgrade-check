@@ -4,10 +4,11 @@
 
 **Find the code a [Google ADK](https://github.com/google/adk-python) upgrade will break, before you upgrade.**
 
+[![PyPI](https://img.shields.io/pypi/v/adk-upgrade-check?color=3776AB&logo=pypi&logoColor=white)](https://pypi.org/project/adk-upgrade-check/)
 [![CI](https://github.com/Reuben-Alex/adk-upgrade-check/actions/workflows/ci.yml/badge.svg)](https://github.com/Reuben-Alex/adk-upgrade-check/actions/workflows/ci.yml)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://pypi.org/project/adk-upgrade-check/)
 [![google-adk ≤ 2.15.1](https://img.shields.io/badge/google--adk-1.x%20%E2%86%92%202.15.1-4285F4?logo=google&logoColor=white)](#rules)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](https://github.com/Reuben-Alex/adk-upgrade-check/blob/main/LICENSE)
 
 <img src="https://raw.githubusercontent.com/Reuben-Alex/adk-upgrade-check/main/docs/demo.svg" alt="adk-upgrade-check reporting four breaking changes in a demo ADK project" width="860">
 
@@ -22,8 +23,8 @@ upstream change and says how to fix it. With `--fix`, it rewrites the mechanical
   and never imports or runs it. No API keys, no LLM calls, and no need to install the target ADK.
 - **Version-aware.** It reads your current version from `uv.lock`, `poetry.lock`, `pdm.lock`,
   `requirements*.txt` or `pyproject.toml`, and runs only the rules for releases you are crossing.
-- **Checked against real releases.** Every rule is tested on the `google-adk` versions either side
-  of the change it detects ([ground truth](#accuracy)).
+- **Checked against real releases.** Every error-level rule is reproduced on the `google-adk`
+  versions either side of the change it detects ([ground truth](#accuracy)).
 - **Low noise.** Each finding is `certain` or `likely`, and only `certain` findings fail CI by
   default.
 - **Built for CI.** Exit codes, JSON, SARIF for GitHub code scanning, a GitHub Action and a
@@ -33,10 +34,10 @@ upstream change and says how to fix it. With `--fix`, it rewrites the mechanical
 
 ```bash
 # Run it once, without installing (needs uv: https://docs.astral.sh/uv/)
-uvx --from git+https://github.com/Reuben-Alex/adk-upgrade-check adk-upgrade-check .
+uvx adk-upgrade-check .
 
 # Or install it
-pipx install git+https://github.com/Reuben-Alex/adk-upgrade-check
+pipx install adk-upgrade-check        # or: pip install adk-upgrade-check
 adk-upgrade-check path/to/your/agent --to 2.15.1
 ```
 
@@ -185,7 +186,9 @@ releases:
 | ADK214-VERTEX-SESSION-KWARGS | 2.13.0: `session_state=` is accepted | 2.14.0: `ValueError: Unsupported create_session option(s)` |
 | ADK215-BUILDER-REMOVED | 2.14.1: `google.adk.cli.built_in_agents` imports | 2.15.0: `ModuleNotFoundError` |
 
-Rules are only shipped when the break reproduces. The 2.0 notes say overridden `_run_async_impl`
+All six error-level rules are reproduced this way. The warning and info rules come from the tagged
+source and changelog, and they never fail CI on their own. A rule is dropped when the break it
+describes doesn't reproduce. The 2.0 notes say overridden `_run_async_impl`
 methods are bypassed, but on the `Runner` path they still run in 1.39.1, 2.0.0 and 2.15.1
 ([`run_override.py`](tests/ground_truth/run_override.py)). So there is no rule for that, because it
 would flag working code.
