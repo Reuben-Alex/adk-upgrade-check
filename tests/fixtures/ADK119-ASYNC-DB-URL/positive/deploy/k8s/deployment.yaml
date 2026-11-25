@@ -1,0 +1,7 @@
+spec:
+  containers:
+    - name: agent
+      args: ["web", "--session_service_uri", "postgresql://agent@db/agents"]  # expect
+      env:
+        - name: DATABASE_URL
+          value: postgresql://agent@db/agents?sslmode=require  # expect

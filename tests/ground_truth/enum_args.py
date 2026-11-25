@@ -24,12 +24,19 @@ def get_price(plan: Plan) -> dict:
   return {"type": type(plan).__name__, "eq_string": plan == "pro"}
 
 
+class Billing:
+
+  def get_price(self, plan: Plan) -> dict:
+    """Returns the price of a plan."""
+    return {"type": type(plan).__name__, "eq_string": plan == "pro"}
+
+
 async def main():
-  tool = FunctionTool(get_price)
   ctx = mock.MagicMock()
   ctx.tool_confirmation = None
-  result = await tool.run_async(args={"plan": "pro"}, tool_context=ctx)
-  print(f"google-adk {version('google-adk')}: {result}")
+  for label, fn in (("function", get_price), ("bound method", Billing().get_price)):
+    result = await FunctionTool(fn).run_async(args={"plan": "pro"}, tool_context=ctx)
+    print(f"google-adk {version('google-adk')} {label}: {result}")
 
 
 asyncio.run(main())

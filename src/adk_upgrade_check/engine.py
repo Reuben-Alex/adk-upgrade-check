@@ -20,11 +20,19 @@ SKIP_DIRS = {
     "site-packages",
 }  # fmt: skip
 
-# Non-Python files some rules read: dependency specs, env files, dashboards.
+# Non-Python files some rules read: dependency specs, env files (`.env`,
+# `.env.example`, ...), deploy scripts, dashboards and Agent Config YAML.
 TEXT_FILES = (
-    ".toml", ".txt", ".cfg", ".yaml", ".yml", ".json", ".env", ".tf", ".sql",
-    "Dockerfile", "Makefile",
+    ".toml", ".txt", ".cfg", ".ini", ".yaml", ".yml", ".json", ".env", ".tf",
+    ".sql", ".sh", ".bash", ".ps1", ".bat", ".cmd", ".mk", "Dockerfile",
+    "Makefile", "Procfile",
 )  # fmt: skip
+
+
+def _matches(name: str, suffixes) -> bool:
+  if name.endswith(suffixes) or name in suffixes:
+    return True
+  return ".env" in suffixes and name.startswith(".env")
 
 
 def discover(
@@ -45,7 +53,7 @@ def discover(
     )
     for f in sorted(filenames):
       p = d / f
-      if (f.endswith(suffixes) or f in suffixes) and not _excluded(
+      if _matches(f, suffixes) and not _excluded(
           p.relative_to(root).as_posix(), exclude
       ):
         out.append(p)
@@ -101,6 +109,7 @@ class Module:
     self.assigns: dict[str, cst.BaseExpression | None] = {}
     self._positions = None
     self._calls = None
+    self._enclosing: dict[int, cst.ClassDef] = {}
     self._index(tree.body)
 
   @property
@@ -116,7 +125,12 @@ class Module:
       if self.uses_adk:
         self.tree.visit(collector)
       self._calls = collector.calls
+      self._enclosing = collector.enclosing
     return self._calls
+
+  def enclosing_class(self, call: cst.Call) -> cst.ClassDef | None:
+    """The class whose body contains `call` (one of `self.calls`)."""
+    return self._enclosing.get(id(call))
 
   def pos(self, node: cst.CSTNode) -> CodeRange:
     if self._positions is None:  # only files with findings pay for this
@@ -215,12 +229,31 @@ def find_all(node: cst.CSTNode, *types: type) -> list:
 
 
 class _CallCollector(cst.CSTVisitor):
+  """Collects calls, remembering the class each one sits in (for `self.x`)."""
 
   def __init__(self):
     self.calls: list[cst.Call] = []
+    self.enclosing: dict[int, cst.ClassDef] = {}
+    self._classes: list[cst.ClassDef] = []
+
+  def visit_ClassDef(self, node: cst.ClassDef) -> None:
+    self._classes.append(node)
+
+  def leave_ClassDef(self, node: cst.ClassDef) -> None:
+    self._classes.pop()
 
   def visit_Call(self, node: cst.Call) -> None:
     self.calls.append(node)
+    if self._classes:
+      self.enclosing[id(node)] = self._classes[-1]
+
+
+def method_of(cls: cst.ClassDef, name: str) -> cst.FunctionDef | None:
+  if isinstance(cls.body, cst.IndentedBlock):
+    for stmt in cls.body.body:
+      if isinstance(stmt, cst.FunctionDef) and stmt.name.value == name:
+        return stmt
+  return None
 
 
 class Project:
@@ -277,7 +310,7 @@ class Project:
       self._text_files = discover(self.root, self.exclude, TEXT_FILES)
     out = []
     for path in self._text_files:
-      if path.name.endswith(names_or_suffixes) or path.name in names_or_suffixes:
+      if _matches(path.name, names_or_suffixes):
         try:
           out.append((path.relative_to(self.root).as_posix(), read_source(path)))
         except (UnicodeDecodeError, OSError):
@@ -316,7 +349,14 @@ class Project:
     return None
 
   def function(self, qualname: str | None, near: Module | None = None):
-    return self._lookup(qualname, "functions", near)
+    """A top-level function, or a method given as `module.Class.method`."""
+    hit = self._lookup(qualname, "functions", near)
+    if hit is None and qualname and qualname.count(".") >= 2:
+      cls_name, meth = qualname.rsplit(".", 1)
+      owner = self.cls(cls_name, near)
+      if owner is not None and (fn := method_of(owner[1], meth)) is not None:
+        hit = owner[0], fn
+    return hit
 
   def cls(self, qualname: str | None, near: Module | None = None):
     return self._lookup(qualname, "classes", near)
@@ -339,5 +379,8 @@ def load_project(
     root: Path, files: list[Path] | None = None, exclude: list[str] | None = None
 ) -> Project:
   root = root.resolve()
-  files = files if files is not None else discover(root, exclude)
-  return Project(root, files, exclude)
+  if files is not None:  # exactly these files, and no others
+    project = Project(root, [f for f in files if f.suffix == ".py"], exclude)
+    project._text_files = [f for f in files if f.suffix != ".py"]
+    return project
+  return Project(root, discover(root, exclude), exclude)

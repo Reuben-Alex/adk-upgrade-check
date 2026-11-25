@@ -16,7 +16,7 @@ Several minor releases since 2.0 have had breaking or behavior changes (2.6.0, 2
 
 ```
 $ adk-upgrade-check . --to 2.15.1
-google-adk 1.18.0 (from uv.lock)  ->  target 2.15.1   (10 rules apply)
+google-adk 1.18.0 (from uv.lock)  ->  target 2.15.1   (11 rules apply)
 
 ERROR   ADK119-ASYNC-DB-URL       billing/agent.py:17
         DatabaseSessionService URL uses the synchronous scheme `sqlite://`. Since 1.19.0 ...
@@ -28,7 +28,7 @@ ERROR   ADK214-ENUM-ARGS          billing/tools.py:10
 ```
 
 **Evidence so far:**
-- It has 10 rules, covering 1.19 through 2.15. Five of them are reproduced on the real releases either side of the change: 1.18.0 vs 1.19.0, 2.6.3 vs 2.7.0, 2.13.0 vs 2.14.0 (twice) and 2.14.1 vs 2.15.0.
+- It has 11 rules, covering 1.19 through 2.15. Six of them are reproduced on the real releases either side of the change: 1.18.0 vs 1.19.0 (twice), 2.6.3 vs 2.7.0, 2.13.0 vs 2.14.0 (twice) and 2.14.1 vs 2.15.0. One of them, the CLI `sqlite://` session-service switch in 1.19, is not in the changelog's breaking changes at all.
 - On 22 public ADK projects plus adk-samples, `ADK119-ASYNC-DB-URL` found 9 real breaks in 7 repos, with no false positives. Two of those repos are pinned to exactly 1.18.0.
 - Findings are split into `certain` and `likely`; only `certain` fails CI by default.
 

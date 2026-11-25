@@ -9,11 +9,12 @@ resolution-markers = [
 
 [[package]]
 name = "adk-upgrade-check"
-version = "0.1.0"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "libcst" },
     { name = "packaging" },
+    { name = "pyyaml" },
 ]
 
 [package.dev-dependencies]
@@ -25,6 +26,7 @@ dev = [
 requires-dist = [
     { name = "libcst", specifier = ">=1.4" },
     { name = "packaging", specifier = ">=23" },
+    { name = "pyyaml", specifier = ">=6" },
 ]
 
 [package.metadata.requires-dev]

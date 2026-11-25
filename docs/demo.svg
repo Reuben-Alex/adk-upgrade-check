@@ -19,139 +19,139 @@
         font-weight: 700;
     }
 
-    .terminal-3012110421-matrix {
+    .terminal-3221432406-matrix {
         font-family: Fira Code, monospace;
         font-size: 20px;
         line-height: 24.4px;
         font-variant-east-asian: full-width;
     }
 
-    .terminal-3012110421-title {
+    .terminal-3221432406-title {
         font-size: 18px;
         font-weight: bold;
         font-family: arial;
     }
 
-    .terminal-3012110421-r1 { fill: #c5c8c6;font-weight: bold }
-.terminal-3012110421-r2 { fill: #c5c8c6 }
-.terminal-3012110421-r3 { fill: #cc555a;font-weight: bold }
-.terminal-3012110421-r4 { fill: #68a0b3 }
-.terminal-3012110421-r5 { fill: #98a84b }
+    .terminal-3221432406-r1 { fill: #c5c8c6;font-weight: bold }
+.terminal-3221432406-r2 { fill: #c5c8c6 }
+.terminal-3221432406-r3 { fill: #cc555a;font-weight: bold }
+.terminal-3221432406-r4 { fill: #68a0b3 }
+.terminal-3221432406-r5 { fill: #98a84b }
     </style>
 
     <defs>
-    <clipPath id="terminal-3012110421-clip-terminal">
+    <clipPath id="terminal-3221432406-clip-terminal">
       <rect x="0" y="0" width="1438.6" height="609.0" />
     </clipPath>
-    <clipPath id="terminal-3012110421-line-0">
+    <clipPath id="terminal-3221432406-line-0">
     <rect x="0" y="1.5" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-1">
+<clipPath id="terminal-3221432406-line-1">
     <rect x="0" y="25.9" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-2">
+<clipPath id="terminal-3221432406-line-2">
     <rect x="0" y="50.3" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-3">
+<clipPath id="terminal-3221432406-line-3">
     <rect x="0" y="74.7" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-4">
+<clipPath id="terminal-3221432406-line-4">
     <rect x="0" y="99.1" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-5">
+<clipPath id="terminal-3221432406-line-5">
     <rect x="0" y="123.5" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-6">
+<clipPath id="terminal-3221432406-line-6">
     <rect x="0" y="147.9" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-7">
+<clipPath id="terminal-3221432406-line-7">
     <rect x="0" y="172.3" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-8">
+<clipPath id="terminal-3221432406-line-8">
     <rect x="0" y="196.7" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-9">
+<clipPath id="terminal-3221432406-line-9">
     <rect x="0" y="221.1" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-10">
+<clipPath id="terminal-3221432406-line-10">
     <rect x="0" y="245.5" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-11">
+<clipPath id="terminal-3221432406-line-11">
     <rect x="0" y="269.9" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-12">
+<clipPath id="terminal-3221432406-line-12">
     <rect x="0" y="294.3" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-13">
+<clipPath id="terminal-3221432406-line-13">
     <rect x="0" y="318.7" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-14">
+<clipPath id="terminal-3221432406-line-14">
     <rect x="0" y="343.1" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-15">
+<clipPath id="terminal-3221432406-line-15">
     <rect x="0" y="367.5" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-16">
+<clipPath id="terminal-3221432406-line-16">
     <rect x="0" y="391.9" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-17">
+<clipPath id="terminal-3221432406-line-17">
     <rect x="0" y="416.3" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-18">
+<clipPath id="terminal-3221432406-line-18">
     <rect x="0" y="440.7" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-19">
+<clipPath id="terminal-3221432406-line-19">
     <rect x="0" y="465.1" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-20">
+<clipPath id="terminal-3221432406-line-20">
     <rect x="0" y="489.5" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-21">
+<clipPath id="terminal-3221432406-line-21">
     <rect x="0" y="513.9" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-22">
+<clipPath id="terminal-3221432406-line-22">
     <rect x="0" y="538.3" width="1439.6" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-3012110421-line-23">
+<clipPath id="terminal-3221432406-line-23">
     <rect x="0" y="562.7" width="1439.6" height="24.65"/>
             </clipPath>
     </defs>
 
-    <rect fill="#292929" stroke="rgba(255,255,255,0.35)" stroke-width="1" x="1" y="1" width="1456" height="658" rx="8"/><text class="terminal-3012110421-title" fill="#c5c8c6" text-anchor="middle" x="728" y="27">adk-upgrade-check</text>
+    <rect fill="#292929" stroke="rgba(255,255,255,0.35)" stroke-width="1" x="1" y="1" width="1456" height="658" rx="8"/><text class="terminal-3221432406-title" fill="#c5c8c6" text-anchor="middle" x="728" y="27">adk-upgrade-check</text>
             <g transform="translate(26,22)">
             <circle cx="0" cy="0" r="7" fill="#ff5f57"/>
             <circle cx="22" cy="0" r="7" fill="#febc2e"/>
             <circle cx="44" cy="0" r="7" fill="#28c840"/>
             </g>
         
-    <g transform="translate(9, 41)" clip-path="url(#terminal-3012110421-clip-terminal)">
+    <g transform="translate(9, 41)" clip-path="url(#terminal-3221432406-clip-terminal)">
     
-    <g class="terminal-3012110421-matrix">
-    <text class="terminal-3012110421-r1" x="0" y="20" textLength="402.6" clip-path="url(#terminal-3012110421-line-0)">$&#160;adk-upgrade-check&#160;examples/demo</text><text class="terminal-3012110421-r2" x="1439.6" y="20" textLength="12.2" clip-path="url(#terminal-3012110421-line-0)">
-</text><text class="terminal-3012110421-r1" x="0" y="44.4" textLength="854" clip-path="url(#terminal-3012110421-line-1)">google-adk&#160;1.18.0&#160;(from&#160;uv.lock)&#160;&#160;-&gt;&#160;&#160;target&#160;2.15.1&#160;&#160;&#160;(10&#160;rules&#160;apply)</text><text class="terminal-3012110421-r2" x="1439.6" y="44.4" textLength="12.2" clip-path="url(#terminal-3012110421-line-1)">
-</text><text class="terminal-3012110421-r2" x="1439.6" y="68.8" textLength="12.2" clip-path="url(#terminal-3012110421-line-2)">
-</text><text class="terminal-3012110421-r3" x="0" y="93.2" textLength="97.6" clip-path="url(#terminal-3012110421-line-3)">ERROR&#160;&#160;&#160;</text><text class="terminal-3012110421-r4" x="97.6" y="93.2" textLength="366" clip-path="url(#terminal-3012110421-line-3)">ADK119-ASYNC-DB-URL&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3012110421-r1" x="463.6" y="93.2" textLength="231.8" clip-path="url(#terminal-3012110421-line-3)">billing/agent.py:17</text><text class="terminal-3012110421-r2" x="1439.6" y="93.2" textLength="12.2" clip-path="url(#terminal-3012110421-line-3)">
-</text><text class="terminal-3012110421-r2" x="0" y="117.6" textLength="1220" clip-path="url(#terminal-3012110421-line-4)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DatabaseSessionService&#160;URL&#160;uses&#160;the&#160;synchronous&#160;scheme&#160;`sqlite://`.&#160;Since&#160;1.19.0&#160;the&#160;service</text><text class="terminal-3012110421-r2" x="1439.6" y="117.6" textLength="12.2" clip-path="url(#terminal-3012110421-line-4)">
-</text><text class="terminal-3012110421-r2" x="0" y="142" textLength="854" clip-path="url(#terminal-3012110421-line-5)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;is&#160;fully&#160;async&#160;and&#160;fails&#160;at&#160;startup&#160;with&#160;a&#160;synchronous&#160;driver.</text><text class="terminal-3012110421-r2" x="1439.6" y="142" textLength="12.2" clip-path="url(#terminal-3012110421-line-5)">
-</text><text class="terminal-3012110421-r5" x="97.6" y="166.4" textLength="48.8" clip-path="url(#terminal-3012110421-line-6)">fix:</text><text class="terminal-3012110421-r2" x="146.4" y="166.4" textLength="963.8" clip-path="url(#terminal-3012110421-line-6)">&#160;use&#160;`sqlite+aiosqlite://`&#160;and&#160;add&#160;the&#160;`aiosqlite`&#160;package&#160;to&#160;your&#160;dependencies</text><text class="terminal-3012110421-r2" x="1439.6" y="166.4" textLength="12.2" clip-path="url(#terminal-3012110421-line-6)">
-</text><text class="terminal-3012110421-r5" x="158.6" y="190.8" textLength="170.8" clip-path="url(#terminal-3012110421-line-7)">[auto-fixable]</text><text class="terminal-3012110421-r2" x="1439.6" y="190.8" textLength="12.2" clip-path="url(#terminal-3012110421-line-7)">
-</text><text class="terminal-3012110421-r2" x="1439.6" y="215.2" textLength="12.2" clip-path="url(#terminal-3012110421-line-8)">
-</text><text class="terminal-3012110421-r3" x="0" y="239.6" textLength="97.6" clip-path="url(#terminal-3012110421-line-9)">ERROR&#160;&#160;&#160;</text><text class="terminal-3012110421-r4" x="97.6" y="239.6" textLength="366" clip-path="url(#terminal-3012110421-line-9)">ADK214-ENUM-ARGS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3012110421-r1" x="463.6" y="239.6" textLength="219.6" clip-path="url(#terminal-3012110421-line-9)">billing/tools.py:8</text><text class="terminal-3012110421-r2" x="1439.6" y="239.6" textLength="12.2" clip-path="url(#terminal-3012110421-line-9)">
-</text><text class="terminal-3012110421-r2" x="0" y="264" textLength="1207.8" clip-path="url(#terminal-3012110421-line-10)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`plan&#160;==&#160;&quot;free&quot;`&#160;compares&#160;Enum&#160;tool&#160;argument&#160;`plan`&#160;with&#160;a&#160;string.&#160;From&#160;2.14.0&#160;FunctionTool</text><text class="terminal-3012110421-r2" x="1439.6" y="264" textLength="12.2" clip-path="url(#terminal-3012110421-line-10)">
-</text><text class="terminal-3012110421-r2" x="0" y="288.4" textLength="646.6" clip-path="url(#terminal-3012110421-line-11)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;passes&#160;Plan&#160;members,&#160;so&#160;this&#160;is&#160;always&#160;False.</text><text class="terminal-3012110421-r2" x="1439.6" y="288.4" textLength="12.2" clip-path="url(#terminal-3012110421-line-11)">
-</text><text class="terminal-3012110421-r5" x="97.6" y="312.8" textLength="48.8" clip-path="url(#terminal-3012110421-line-12)">fix:</text><text class="terminal-3012110421-r2" x="146.4" y="312.8" textLength="366" clip-path="url(#terminal-3012110421-line-12)">&#160;compare&#160;against&#160;`Plan.FREE`&#160;&#160;</text><text class="terminal-3012110421-r5" x="512.4" y="312.8" textLength="170.8" clip-path="url(#terminal-3012110421-line-12)">[auto-fixable]</text><text class="terminal-3012110421-r2" x="1439.6" y="312.8" textLength="12.2" clip-path="url(#terminal-3012110421-line-12)">
-</text><text class="terminal-3012110421-r2" x="1439.6" y="337.2" textLength="12.2" clip-path="url(#terminal-3012110421-line-13)">
-</text><text class="terminal-3012110421-r3" x="0" y="361.6" textLength="97.6" clip-path="url(#terminal-3012110421-line-14)">ERROR&#160;&#160;&#160;</text><text class="terminal-3012110421-r4" x="97.6" y="361.6" textLength="366" clip-path="url(#terminal-3012110421-line-14)">ADK214-ENUM-ARGS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3012110421-r1" x="463.6" y="361.6" textLength="231.8" clip-path="url(#terminal-3012110421-line-14)">billing/tools.py:10</text><text class="terminal-3012110421-r2" x="1439.6" y="361.6" textLength="12.2" clip-path="url(#terminal-3012110421-line-14)">
-</text><text class="terminal-3012110421-r2" x="0" y="386" textLength="1195.6" clip-path="url(#terminal-3012110421-line-15)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`plan&#160;==&#160;&quot;pro&quot;`&#160;compares&#160;Enum&#160;tool&#160;argument&#160;`plan`&#160;with&#160;a&#160;string.&#160;From&#160;2.14.0&#160;FunctionTool</text><text class="terminal-3012110421-r2" x="1439.6" y="386" textLength="12.2" clip-path="url(#terminal-3012110421-line-15)">
-</text><text class="terminal-3012110421-r2" x="0" y="410.4" textLength="646.6" clip-path="url(#terminal-3012110421-line-16)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;passes&#160;Plan&#160;members,&#160;so&#160;this&#160;is&#160;always&#160;False.</text><text class="terminal-3012110421-r2" x="1439.6" y="410.4" textLength="12.2" clip-path="url(#terminal-3012110421-line-16)">
-</text><text class="terminal-3012110421-r5" x="97.6" y="434.8" textLength="48.8" clip-path="url(#terminal-3012110421-line-17)">fix:</text><text class="terminal-3012110421-r2" x="146.4" y="434.8" textLength="353.8" clip-path="url(#terminal-3012110421-line-17)">&#160;compare&#160;against&#160;`Plan.PRO`&#160;&#160;</text><text class="terminal-3012110421-r5" x="500.2" y="434.8" textLength="170.8" clip-path="url(#terminal-3012110421-line-17)">[auto-fixable]</text><text class="terminal-3012110421-r2" x="1439.6" y="434.8" textLength="12.2" clip-path="url(#terminal-3012110421-line-17)">
-</text><text class="terminal-3012110421-r2" x="1439.6" y="459.2" textLength="12.2" clip-path="url(#terminal-3012110421-line-18)">
-</text><text class="terminal-3012110421-r3" x="0" y="483.6" textLength="97.6" clip-path="url(#terminal-3012110421-line-19)">ERROR&#160;&#160;&#160;</text><text class="terminal-3012110421-r4" x="97.6" y="483.6" textLength="366" clip-path="url(#terminal-3012110421-line-19)">ADK214-ENUM-ARGS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3012110421-r1" x="463.6" y="483.6" textLength="231.8" clip-path="url(#terminal-3012110421-line-19)">billing/tools.py:11</text><text class="terminal-3012110421-r2" x="1439.6" y="483.6" textLength="12.2" clip-path="url(#terminal-3012110421-line-19)">
-</text><text class="terminal-3012110421-r2" x="0" y="508" textLength="1220" clip-path="url(#terminal-3012110421-line-20)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`SEATS[plan]`&#160;looks&#160;up&#160;a&#160;string-keyed&#160;dict&#160;with&#160;Enum&#160;tool&#160;argument&#160;`plan`.&#160;From&#160;2.14.0&#160;it&#160;is</text><text class="terminal-3012110421-r2" x="1439.6" y="508" textLength="12.2" clip-path="url(#terminal-3012110421-line-20)">
-</text><text class="terminal-3012110421-r2" x="0" y="532.4" textLength="573.4" clip-path="url(#terminal-3012110421-line-21)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;a&#160;Plan&#160;member,&#160;so&#160;this&#160;raises&#160;KeyError.</text><text class="terminal-3012110421-r2" x="1439.6" y="532.4" textLength="12.2" clip-path="url(#terminal-3012110421-line-21)">
-</text><text class="terminal-3012110421-r5" x="97.6" y="556.8" textLength="48.8" clip-path="url(#terminal-3012110421-line-22)">fix:</text><text class="terminal-3012110421-r2" x="146.4" y="556.8" textLength="695.4" clip-path="url(#terminal-3012110421-line-22)">&#160;use&#160;`SEATS[plan.value]`,&#160;or&#160;key&#160;the&#160;dict&#160;by&#160;Plan&#160;members</text><text class="terminal-3012110421-r2" x="1439.6" y="556.8" textLength="12.2" clip-path="url(#terminal-3012110421-line-22)">
-</text><text class="terminal-3012110421-r2" x="1439.6" y="581.2" textLength="12.2" clip-path="url(#terminal-3012110421-line-23)">
-</text><text class="terminal-3012110421-r1" x="0" y="605.6" textLength="756.4" clip-path="url(#terminal-3012110421-line-24)">4&#160;findings:&#160;4&#160;errors.&#160;3&#160;auto-fixable,&#160;run&#160;with&#160;--fix&#160;to&#160;apply.</text><text class="terminal-3012110421-r2" x="1439.6" y="605.6" textLength="12.2" clip-path="url(#terminal-3012110421-line-24)">
+    <g class="terminal-3221432406-matrix">
+    <text class="terminal-3221432406-r1" x="0" y="20" textLength="402.6" clip-path="url(#terminal-3221432406-line-0)">$&#160;adk-upgrade-check&#160;examples/demo</text><text class="terminal-3221432406-r2" x="1439.6" y="20" textLength="12.2" clip-path="url(#terminal-3221432406-line-0)">
+</text><text class="terminal-3221432406-r1" x="0" y="44.4" textLength="854" clip-path="url(#terminal-3221432406-line-1)">google-adk&#160;1.18.0&#160;(from&#160;uv.lock)&#160;&#160;-&gt;&#160;&#160;target&#160;2.15.1&#160;&#160;&#160;(11&#160;rules&#160;apply)</text><text class="terminal-3221432406-r2" x="1439.6" y="44.4" textLength="12.2" clip-path="url(#terminal-3221432406-line-1)">
+</text><text class="terminal-3221432406-r2" x="1439.6" y="68.8" textLength="12.2" clip-path="url(#terminal-3221432406-line-2)">
+</text><text class="terminal-3221432406-r3" x="0" y="93.2" textLength="97.6" clip-path="url(#terminal-3221432406-line-3)">ERROR&#160;&#160;&#160;</text><text class="terminal-3221432406-r4" x="97.6" y="93.2" textLength="366" clip-path="url(#terminal-3221432406-line-3)">ADK119-ASYNC-DB-URL&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3221432406-r1" x="463.6" y="93.2" textLength="231.8" clip-path="url(#terminal-3221432406-line-3)">billing/agent.py:17</text><text class="terminal-3221432406-r2" x="1439.6" y="93.2" textLength="12.2" clip-path="url(#terminal-3221432406-line-3)">
+</text><text class="terminal-3221432406-r2" x="0" y="117.6" textLength="1220" clip-path="url(#terminal-3221432406-line-4)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DatabaseSessionService&#160;URL&#160;uses&#160;the&#160;synchronous&#160;scheme&#160;`sqlite://`.&#160;Since&#160;1.19.0&#160;the&#160;service</text><text class="terminal-3221432406-r2" x="1439.6" y="117.6" textLength="12.2" clip-path="url(#terminal-3221432406-line-4)">
+</text><text class="terminal-3221432406-r2" x="0" y="142" textLength="854" clip-path="url(#terminal-3221432406-line-5)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;is&#160;fully&#160;async&#160;and&#160;fails&#160;at&#160;startup&#160;with&#160;a&#160;synchronous&#160;driver.</text><text class="terminal-3221432406-r2" x="1439.6" y="142" textLength="12.2" clip-path="url(#terminal-3221432406-line-5)">
+</text><text class="terminal-3221432406-r5" x="97.6" y="166.4" textLength="48.8" clip-path="url(#terminal-3221432406-line-6)">fix:</text><text class="terminal-3221432406-r2" x="146.4" y="166.4" textLength="963.8" clip-path="url(#terminal-3221432406-line-6)">&#160;use&#160;`sqlite+aiosqlite://`&#160;and&#160;add&#160;the&#160;`aiosqlite`&#160;package&#160;to&#160;your&#160;dependencies</text><text class="terminal-3221432406-r2" x="1439.6" y="166.4" textLength="12.2" clip-path="url(#terminal-3221432406-line-6)">
+</text><text class="terminal-3221432406-r5" x="158.6" y="190.8" textLength="170.8" clip-path="url(#terminal-3221432406-line-7)">[auto-fixable]</text><text class="terminal-3221432406-r2" x="1439.6" y="190.8" textLength="12.2" clip-path="url(#terminal-3221432406-line-7)">
+</text><text class="terminal-3221432406-r2" x="1439.6" y="215.2" textLength="12.2" clip-path="url(#terminal-3221432406-line-8)">
+</text><text class="terminal-3221432406-r3" x="0" y="239.6" textLength="97.6" clip-path="url(#terminal-3221432406-line-9)">ERROR&#160;&#160;&#160;</text><text class="terminal-3221432406-r4" x="97.6" y="239.6" textLength="366" clip-path="url(#terminal-3221432406-line-9)">ADK214-ENUM-ARGS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3221432406-r1" x="463.6" y="239.6" textLength="219.6" clip-path="url(#terminal-3221432406-line-9)">billing/tools.py:8</text><text class="terminal-3221432406-r2" x="1439.6" y="239.6" textLength="12.2" clip-path="url(#terminal-3221432406-line-9)">
+</text><text class="terminal-3221432406-r2" x="0" y="264" textLength="1207.8" clip-path="url(#terminal-3221432406-line-10)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`plan&#160;==&#160;&quot;free&quot;`&#160;compares&#160;Enum&#160;tool&#160;argument&#160;`plan`&#160;with&#160;a&#160;string.&#160;From&#160;2.14.0&#160;FunctionTool</text><text class="terminal-3221432406-r2" x="1439.6" y="264" textLength="12.2" clip-path="url(#terminal-3221432406-line-10)">
+</text><text class="terminal-3221432406-r2" x="0" y="288.4" textLength="646.6" clip-path="url(#terminal-3221432406-line-11)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;passes&#160;Plan&#160;members,&#160;so&#160;this&#160;is&#160;always&#160;False.</text><text class="terminal-3221432406-r2" x="1439.6" y="288.4" textLength="12.2" clip-path="url(#terminal-3221432406-line-11)">
+</text><text class="terminal-3221432406-r5" x="97.6" y="312.8" textLength="48.8" clip-path="url(#terminal-3221432406-line-12)">fix:</text><text class="terminal-3221432406-r2" x="146.4" y="312.8" textLength="366" clip-path="url(#terminal-3221432406-line-12)">&#160;compare&#160;against&#160;`Plan.FREE`&#160;&#160;</text><text class="terminal-3221432406-r5" x="512.4" y="312.8" textLength="170.8" clip-path="url(#terminal-3221432406-line-12)">[auto-fixable]</text><text class="terminal-3221432406-r2" x="1439.6" y="312.8" textLength="12.2" clip-path="url(#terminal-3221432406-line-12)">
+</text><text class="terminal-3221432406-r2" x="1439.6" y="337.2" textLength="12.2" clip-path="url(#terminal-3221432406-line-13)">
+</text><text class="terminal-3221432406-r3" x="0" y="361.6" textLength="97.6" clip-path="url(#terminal-3221432406-line-14)">ERROR&#160;&#160;&#160;</text><text class="terminal-3221432406-r4" x="97.6" y="361.6" textLength="366" clip-path="url(#terminal-3221432406-line-14)">ADK214-ENUM-ARGS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3221432406-r1" x="463.6" y="361.6" textLength="231.8" clip-path="url(#terminal-3221432406-line-14)">billing/tools.py:10</text><text class="terminal-3221432406-r2" x="1439.6" y="361.6" textLength="12.2" clip-path="url(#terminal-3221432406-line-14)">
+</text><text class="terminal-3221432406-r2" x="0" y="386" textLength="1195.6" clip-path="url(#terminal-3221432406-line-15)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`plan&#160;==&#160;&quot;pro&quot;`&#160;compares&#160;Enum&#160;tool&#160;argument&#160;`plan`&#160;with&#160;a&#160;string.&#160;From&#160;2.14.0&#160;FunctionTool</text><text class="terminal-3221432406-r2" x="1439.6" y="386" textLength="12.2" clip-path="url(#terminal-3221432406-line-15)">
+</text><text class="terminal-3221432406-r2" x="0" y="410.4" textLength="646.6" clip-path="url(#terminal-3221432406-line-16)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;passes&#160;Plan&#160;members,&#160;so&#160;this&#160;is&#160;always&#160;False.</text><text class="terminal-3221432406-r2" x="1439.6" y="410.4" textLength="12.2" clip-path="url(#terminal-3221432406-line-16)">
+</text><text class="terminal-3221432406-r5" x="97.6" y="434.8" textLength="48.8" clip-path="url(#terminal-3221432406-line-17)">fix:</text><text class="terminal-3221432406-r2" x="146.4" y="434.8" textLength="353.8" clip-path="url(#terminal-3221432406-line-17)">&#160;compare&#160;against&#160;`Plan.PRO`&#160;&#160;</text><text class="terminal-3221432406-r5" x="500.2" y="434.8" textLength="170.8" clip-path="url(#terminal-3221432406-line-17)">[auto-fixable]</text><text class="terminal-3221432406-r2" x="1439.6" y="434.8" textLength="12.2" clip-path="url(#terminal-3221432406-line-17)">
+</text><text class="terminal-3221432406-r2" x="1439.6" y="459.2" textLength="12.2" clip-path="url(#terminal-3221432406-line-18)">
+</text><text class="terminal-3221432406-r3" x="0" y="483.6" textLength="97.6" clip-path="url(#terminal-3221432406-line-19)">ERROR&#160;&#160;&#160;</text><text class="terminal-3221432406-r4" x="97.6" y="483.6" textLength="366" clip-path="url(#terminal-3221432406-line-19)">ADK214-ENUM-ARGS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-3221432406-r1" x="463.6" y="483.6" textLength="231.8" clip-path="url(#terminal-3221432406-line-19)">billing/tools.py:11</text><text class="terminal-3221432406-r2" x="1439.6" y="483.6" textLength="12.2" clip-path="url(#terminal-3221432406-line-19)">
+</text><text class="terminal-3221432406-r2" x="0" y="508" textLength="1220" clip-path="url(#terminal-3221432406-line-20)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`SEATS[plan]`&#160;looks&#160;up&#160;a&#160;string-keyed&#160;dict&#160;with&#160;Enum&#160;tool&#160;argument&#160;`plan`.&#160;From&#160;2.14.0&#160;it&#160;is</text><text class="terminal-3221432406-r2" x="1439.6" y="508" textLength="12.2" clip-path="url(#terminal-3221432406-line-20)">
+</text><text class="terminal-3221432406-r2" x="0" y="532.4" textLength="573.4" clip-path="url(#terminal-3221432406-line-21)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;a&#160;Plan&#160;member,&#160;so&#160;this&#160;raises&#160;KeyError.</text><text class="terminal-3221432406-r2" x="1439.6" y="532.4" textLength="12.2" clip-path="url(#terminal-3221432406-line-21)">
+</text><text class="terminal-3221432406-r5" x="97.6" y="556.8" textLength="48.8" clip-path="url(#terminal-3221432406-line-22)">fix:</text><text class="terminal-3221432406-r2" x="146.4" y="556.8" textLength="695.4" clip-path="url(#terminal-3221432406-line-22)">&#160;use&#160;`SEATS[plan.value]`,&#160;or&#160;key&#160;the&#160;dict&#160;by&#160;Plan&#160;members</text><text class="terminal-3221432406-r2" x="1439.6" y="556.8" textLength="12.2" clip-path="url(#terminal-3221432406-line-22)">
+</text><text class="terminal-3221432406-r2" x="1439.6" y="581.2" textLength="12.2" clip-path="url(#terminal-3221432406-line-23)">
+</text><text class="terminal-3221432406-r1" x="0" y="605.6" textLength="756.4" clip-path="url(#terminal-3221432406-line-24)">4&#160;findings:&#160;4&#160;errors.&#160;3&#160;auto-fixable,&#160;run&#160;with&#160;--fix&#160;to&#160;apply.</text><text class="terminal-3221432406-r2" x="1439.6" y="605.6" textLength="12.2" clip-path="url(#terminal-3221432406-line-24)">
 </text>
     </g>
     </g>

@@ -157,3 +157,96 @@ def test_sarif_output_lists_rules_and_results(tmp_path, capsys):
   [result] = run["results"]
   assert result["ruleId"] == "ADK119-ASYNC-DB-URL"
   assert result["locations"][0]["physicalLocation"]["region"]["startLine"] == 3
+
+
+def test_methods_registered_as_tools(tmp_path):
+  _write(tmp_path, {
+      "billing/__init__.py": "",
+      "billing/models.py": MODELS,
+      "billing/service.py": """
+          from google.adk.agents import Agent
+          from google.adk.tools import FunctionTool
+          from .models import Plan
+
+          class Billing:
+
+            def price(self, plan: Plan) -> int:
+              return 20 if plan == "pro" else 0
+
+            def tools(self):
+              return [FunctionTool(self.price)]
+
+          class Refunds:
+
+            def refund(self, plan: Plan) -> bool:
+              return plan == "pro"
+
+            def unrelated(self, plan: Plan) -> bool:
+              return plan == "pro"  # never registered
+
+          refunds = Refunds()
+          root_agent = Agent(name="b", tools=[refunds.refund])
+      """,
+  })  # fmt: skip
+  findings = list(ENUM.check(load_project(tmp_path)))
+  assert sorted(f.line for f in findings) == [9, 17]
+
+
+def test_tools_named_in_agent_config_yaml(tmp_path):
+  _write(tmp_path, {
+      "my_agent/__init__.py": "",
+      "my_agent/models.py": MODELS,
+      "my_agent/tools.py": TOOLS.format(models="my_agent.models"),
+      "my_agent/factories.py": TOOLS.format(models="my_agent.models"),
+      "my_agent/root_agent.yaml": """
+          # yaml-language-server: $schema=https://raw.githubusercontent.com/google/adk-python/refs/heads/main/src/google/adk/agents/config_schemas/AgentConfig.json
+          name: billing
+          model: gemini-2.5-flash
+          instruction: Answer pricing questions.
+          tools:
+            - name: google_search
+            - name: my_agent.tools.get_price
+            - name: my_agent.factories.get_price
+              args:
+                region: eu
+      """,
+  })  # fmt: skip
+  findings = list(ENUM.check(load_project(tmp_path)))
+  # The factory (it has `args`) builds a tool; only the plain function is one.
+  assert [(f.path, f.line) for f in findings] == [("my_agent/tools.py", 4)]
+
+
+def test_config_file_syntaxes(tmp_path):
+  from adk_upgrade_check.config_files import cli_session_uris, env_ref, env_values
+
+  _write(tmp_path, {
+      "Dockerfile": """
+          FROM python:3.12-slim
+          ENV DB_A=postgresql://a@db/x
+          ENV DB_B postgresql://b@db/x
+          CMD ["adk", "api_server", "--session_service_uri", "sqlite:///data/s.db", "agents"]
+      """,
+      "compose.yaml": """
+          services:
+            agent:
+              environment:
+                DB_C: "postgresql://c@db/x"
+                - DB_D=postgresql://d@db/x
+      """,
+      "k8s.yaml": """
+          env:
+            - name: DB_E
+              value: postgresql://e@db/x
+      """,
+      "run.ps1": "adk web --session_service_uri $env:DB_F agents\n",
+      "run.bat": "adk web --session_service_uri %DB_G% agents\n",
+  })  # fmt: skip
+  envs = env_values(load_project(tmp_path))
+  assert {n: v[0].text.split("@")[0] for n, v in envs.items()} == {
+      "DB_A": "postgresql://a", "DB_B": "postgresql://b",
+      "DB_C": "postgresql://c", "DB_D": "postgresql://d",
+      "DB_E": "postgresql://e",
+  }  # fmt: skip
+  flags = sorted(v.text for v in cli_session_uris(load_project(tmp_path)))
+  assert flags == ["$env:DB_F", "%DB_G%", "sqlite:///data/s.db"]
+  assert [env_ref(f) for f in flags] == ["DB_F", "DB_G", None]

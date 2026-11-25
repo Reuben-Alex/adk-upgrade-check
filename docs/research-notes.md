@@ -47,6 +47,9 @@ Verified as stated: google/adk-python#4387 (Alembic RFC, open), #4408 (Alembic P
 | 2.13: `call_llm` span removed | Real, but code often handles both schemas (adk-samples' `trace_converter.py` checks `call_llm` *or* `gen_ai.*`), so findings are `likely`. | corpus |
 | 2.14: Vertex `create_session` kwargs | 2.13.0 merged extra kwargs into the config (`config.update(kwargs)`). On 2.14.0, `session_state=` raises `ValueError`. Renaming to `state=` / `session_id=` keeps the behaviour. | `tests/ground_truth/removals.py` |
 | 2.15: builder removed | `google.adk.cli.built_in_agents` imports on 2.14.1 and raises `ModuleNotFoundError` on 2.15.0. | `tests/ground_truth/removals.py` |
+| 1.19: CLI `--session_service_uri sqlite://` | The CLI registry maps `sqlite` to the new `SqliteSessionService` (1.18 used `DatabaseSessionService` for `sqlite`, `postgresql` and `mysql`). A database written by 1.18 makes 1.19.0 and 2.15.1 raise `RuntimeError: … seems to use an old schema`. It is not in the changelog's breaking changes. New rule: `ADK119-SQLITE-SERVICE`. | `tests/ground_truth/sqlite_cli_switch.py` |
+| 1.19: CLI `postgresql+asyncpg://` | Unregistered schemes fall back to `DatabaseSessionService` (1.19 `fast_api.py`; later `service_factory.py`), so rewriting a CLI `postgresql://` to `+asyncpg` is safe. | source at v1.19.0, v2.0.0 |
+| 2.14: Enum args for bound methods | `FunctionTool(Billing().get_price)` converts too (2.13: `str`, 2.14: `Plan`), so methods registered as tools are followed. | `tests/ground_truth/enum_args.py` |
 
 ## Rule ideas found during research (not built yet)
 

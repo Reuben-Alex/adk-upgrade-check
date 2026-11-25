@@ -64,7 +64,8 @@ target version is at least that release: `--from < release <= --to`. Run
 
 | Rule | Release | What breaks | Auto-fix |
 |---|---|---|---|
-| [`ADK119-ASYNC-DB-URL`](src/adk_upgrade_check/rules/adk119_async_db_url.py) | 1.19.0 | A synchronous DB URL (`sqlite:///`, `postgresql://`, `+psycopg2`, `mysql+pymysql`…) passed to `DatabaseSessionService` fails at startup. The changelog listed this as a feature, not a breaking change. | ✅ |
+| [`ADK119-ASYNC-DB-URL`](src/adk_upgrade_check/rules/adk119_async_db_url.py) | 1.19.0 | A synchronous DB URL (`sqlite:///`, `postgresql://`, `+psycopg2`, `mysql+pymysql`…) given to `DatabaseSessionService` fails at startup. The rule checks code, the `.env` files and deploy manifests that set the URL, and `--session_service_uri` flags. The changelog listed this as a feature, not a breaking change. | ✅ |
+| [`ADK119-SQLITE-SERVICE`](src/adk_upgrade_check/rules/adk119_sqlite_service.py) | 1.19.0 | `adk web` / `adk api_server --session_service_uri sqlite:///…` switches to `SqliteSessionService`, which refuses a database written by 1.18 or earlier until it is migrated. Not in the changelog's breaking changes. | |
 | [`ADK200-DIRECT-APPEND`](src/adk_upgrade_check/rules/adk200_direct_append.py) | 2.0.0 | `ctx.session.events.append(event)` bypasses the 2.0 event pipeline, so the event is never persisted, routed or streamed. | |
 | [`ADK200-EVENT-SCHEMA`](src/adk_upgrade_check/rules/adk200_event_schema.py) | 2.0.0 | A custom `BaseSessionService` that maps events to fixed columns breaks on the new `node_info` and `output` fields. | |
 | [`ADK206-ARTIFACT-NS`](src/adk_upgrade_check/rules/adk206_artifact_ns.py) | 2.6.0 | `FileArtifactService` moves artifacts to a per-app path. The next save of an existing artifact restarts its version numbering. | |
@@ -96,7 +97,7 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v4
-      - uses: Reuben-Alex/adk-upgrade-check@v0.1.0
+      - uses: Reuben-Alex/adk-upgrade-check@v0.2.0
         with:
           to: latest
           sarif: adk-upgrade-check.sarif
@@ -111,7 +112,7 @@ jobs:
 ```yaml
 repos:
   - repo: https://github.com/Reuben-Alex/adk-upgrade-check
-    rev: v0.1.0
+    rev: v0.2.0
     hooks:
       - id: adk-upgrade-check
         args: ["--to", "latest"]
@@ -159,8 +160,12 @@ flowchart LR
   other libraries don't match.
 - **Cross-file analysis.** For the Enum rule, the tool finds which functions are tools by following
   `Agent(tools=[...])` and `FunctionTool(fn)` through imports, package re-exports, shared
-  `ALL_TOOLS` lists and monorepo layouts. It then checks how those functions use their Enum
-  parameters.
+  `ALL_TOOLS` lists, methods (`self.lookup`, `billing.lookup`), Agent Config YAML
+  (`tools: - name: my_agent.tools.get_price`) and monorepo layouts. It then checks how those
+  functions use their Enum parameters.
+- **Beyond Python.** Database URLs are followed from the code that reads them (`os.environ["X"]`)
+  into `.env` files, Dockerfiles, docker-compose, Kubernetes manifests and shell scripts. The checker
+  also reads `--session_service_uri` flags in deploy scripts, including `$VAR` references.
 - **Fast.** Only files that mention `google.adk` are parsed up front. Everything else is parsed on
   demand, when an import resolves to it. google/adk-samples (1,956 files) takes about 14 seconds.
 - **Formatting-preserving fixes.** Fixes are applied as text edits at exact source positions, so
@@ -174,8 +179,9 @@ releases:
 | Rule | Before | After |
 |---|---|---|
 | ADK119-ASYNC-DB-URL | 1.18.0: `sqlite:///` works | 1.19.0: `ValueError`, while `sqlite+aiosqlite:///` works |
+| ADK119-SQLITE-SERVICE | 1.18.0: CLI `sqlite:///` writes sessions with `DatabaseSessionService` | 1.19.0 and 2.15.1: `RuntimeError: … seems to use an old schema. Please run the migration command` |
 | ADK207-PYARROW-EXTRA | 2.6.3 `[gcp]`: plugin and pyarrow import | 2.7.0 `[gcp]`: `ImportError: pyarrow is required` |
-| ADK214-ENUM-ARGS | 2.13.0: the tool gets `str`, and `plan == "pro"` is `True` | 2.14.0: the tool gets `Plan`, and `plan == "pro"` is `False` |
+| ADK214-ENUM-ARGS | 2.13.0: the tool (a function or a bound method) gets `str`, and `plan == "pro"` is `True` | 2.14.0: it gets `Plan`, and `plan == "pro"` is `False` |
 | ADK214-VERTEX-SESSION-KWARGS | 2.13.0: `session_state=` is accepted | 2.14.0: `ValueError: Unsupported create_session option(s)` |
 | ADK215-BUILDER-REMOVED | 2.14.1: `google.adk.cli.built_in_agents` imports | 2.15.0: `ModuleNotFoundError` |
 
@@ -191,19 +197,22 @@ GitHub code search, and every finding was labelled by hand:
 | Rule | Findings | Real breaks | Notes |
 |---|---:|---:|---|
 | ADK119-ASYNC-DB-URL | 9 | 9 | 7 repos; two are pinned to exactly 1.18.0. |
+| ADK119-SQLITE-SERVICE | 2 | 2 | `likely`. Both scripts break on upgrade, but through the repo's own CLI wrapper, which raises the async-driver error rather than the schema error. |
 | ADK213-OTEL-SEMCONV | 3 | 2 | `likely`. The other one already handles both schemas. |
 | ADK215-MCP-PROMPT-ARGS | 1 | 0 | `likely`. The prompts take no arguments. |
-| The other seven rules | 0 | – | No noise. Of 381 tool functions found, one had an Enum parameter, and it was used safely. |
+| The other seven rules | 0 | – | No noise. Of 461 tool functions found (7 of them methods), one had an Enum parameter, and it was used safely. |
 
-Every `certain` finding was a real break. The three wrong findings are all `likely`, so none of them
-would fail a CI run by default.
+Every `certain` finding was a real break. The two wrong findings are both `likely`, so neither would
+fail a CI run by default.
 
 ## Limitations
 
-- Methods registered as tools (`FunctionTool(self.lookup)`) aren't followed yet.
-- DB URLs that only appear in `.env` files, Dockerfiles or `--session_service_uri` flags aren't
-  checked.
-- Agents defined in Agent Config YAML aren't read.
+- Tool lists built at runtime (`self.tools.append(...)`, list comprehensions, plugin registries) and
+  methods inherited from a base class aren't followed.
+- In Kubernetes manifests, a `--session_service_uri` flag is read from the line it appears on, so a
+  `command:`/`args:` split over several YAML lines is only partly understood.
+- Env vars are matched by name across the whole project. A variable set differently per environment
+  is checked in every file that sets it.
 - The checker reports what your code will hit. It doesn't migrate session data: for that, use
   `adk migrate session`.
 

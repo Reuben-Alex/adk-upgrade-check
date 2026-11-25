@@ -13,8 +13,10 @@ from dataclasses import dataclass
 
 import libcst as cst
 from packaging.version import Version
+import yaml
 
 from ..engine import is_adk
+from ..engine import method_of
 from ..engine import Module
 from ..engine import Project
 from ..engine import string_value
@@ -218,7 +220,8 @@ class EnumArgs(Rule):
 
 
 def _tool_functions(project: Project):
-  """Functions passed to an ADK agent's `tools=[...]` or to `FunctionTool(...)`."""
+  """Functions and methods registered as tools: in an ADK agent's `tools=[...]`,
+  in `FunctionTool(...)`, or by dotted name in Agent Config YAML."""
   seen = {}
   for m in project.modules:
     for call in m.calls:
@@ -232,11 +235,76 @@ def _tool_functions(project: Project):
               i == 0 and arg.keyword is None and not arg.star
           ):
             exprs.append(arg.value)
+      owner = m.enclosing_class(call)
       for ref_m, ref in _expand_tools(project, m, exprs):
-        hit = project.function(ref_m.qualname(ref), near=ref_m)
+        hit = _resolve_tool(project, ref_m, ref, owner if ref_m is m else None)
         if hit:
-          seen[(hit[0].name, hit[1].name.value)] = hit
+          seen[id(hit[1])] = hit
+  for hit in _yaml_tools(project):
+    seen[id(hit[1])] = hit
   return list(seen.values())
+
+
+def _resolve_tool(project: Project, m: Module, ref, owner: cst.ClassDef | None):
+  """The function or method a tool reference points to, if it's in the project."""
+  # `self.lookup` inside the class that defines it
+  if (
+      owner is not None
+      and isinstance(ref, cst.Attribute)
+      and isinstance(ref.value, cst.Name)
+      and ref.value.value in ("self", "cls")
+  ):
+    fn = method_of(owner, ref.attr.value)
+    return (m, fn) if fn is not None else None
+  # A function, or `Class.method`
+  hit = project.function(m.qualname(ref), near=m)
+  if hit is not None:
+    return hit
+  # `billing.lookup` where `billing = Billing(...)` at module level
+  if isinstance(ref, cst.Attribute):
+    inst = project.assign(m.qualname(ref.value), near=m)
+    if inst is not None and isinstance(inst[1], cst.Call):
+      owner_hit = project.cls(inst[0].qualname(inst[1].func), near=inst[0])
+      if owner_hit is not None:
+        fn = method_of(owner_hit[1], ref.attr.value)
+        if fn is not None:
+          return owner_hit[0], fn
+  return None
+
+
+@dataclass
+class _At:
+  rel: str  # stands in for a Module as the `near` of a lookup
+
+
+def _yaml_tools(project: Project):
+  """Plain functions named in Agent Config YAML `tools:` (`- name: pkg.mod.fn`).
+
+  ADK imports a dotted name with no `args` and wraps a plain function in
+  FunctionTool, so the 2.14 change applies to it too.
+  """
+  for rel, text in project.text_files(".yaml", ".yml"):
+    if "tools" not in text:
+      continue
+    try:
+      docs = list(yaml.safe_load_all(text))
+    except yaml.YAMLError:
+      continue
+    for doc in docs:
+      if not (
+          isinstance(doc, dict)
+          and isinstance(doc.get("tools"), list)
+          and {"agent_class", "model", "instruction"} & doc.keys()
+      ):
+        continue
+      for tool in doc["tools"]:
+        if not isinstance(tool, dict) or tool.get("args"):
+          continue  # `args` means a tool class or factory, not a function
+        name = tool.get("name")
+        if isinstance(name, str) and "." in name:
+          hit = project.function(name, near=_At(rel))
+          if hit is not None:
+            yield hit
 
 
 def _expand_tools(project: Project, m: Module, exprs, depth: int = 0):

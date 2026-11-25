@@ -4,6 +4,11 @@ It builds its engine with `create_async_engine`, which rejects a synchronous
 driver. A URL such as `postgresql://...` or `sqlite:///...` that worked on
 1.18 now fails at startup with "resolves to a synchronous driver". The
 changelog listed this as a feature, not a breaking change.
+
+Checks the URL in code (literal, module constant, `os.getenv` default), in the
+env files and deploy manifests that set the env var the code reads, and in
+`adk web` / `adk api_server --session_service_uri` flags (where bare `sqlite://`
+is a separate case: see ADK119-SQLITE-SERVICE).
 """
 
 from __future__ import annotations
@@ -11,6 +16,10 @@ from __future__ import annotations
 import libcst as cst
 from packaging.version import Version
 
+from ..config_files import cli_session_uris
+from ..config_files import env_ref
+from ..config_files import env_values
+from ..config_files import Value
 from ..engine import is_adk
 from ..engine import Module
 from ..engine import string_value
@@ -48,6 +57,7 @@ class AsyncDbUrl(Rule):
   changelog_url = "https://github.com/google/adk-python/commit/74959414d8ded733d584875a49fb4638a12d3ce5"
 
   def check(self, project):
+    env_users: dict[str, str] = {}  # env var -> where DatabaseSessionService reads it
     for m in project.modules:
       for call in m.calls:
         if not is_adk(m.qualname(call.func), "DatabaseSessionService"):
@@ -56,6 +66,49 @@ class AsyncDbUrl(Rule):
         if arg is None:
           continue
         yield from self._check_value(m, arg)
+        name = _env_name(m, arg)
+        if name:
+          env_users.setdefault(name, f"{m.rel}:{m.pos(arg).start.line}")
+
+    # The same URL set in .env files, Dockerfiles, compose or k8s manifests, or
+    # passed to `adk web/api_server --session_service_uri`.
+    envs = env_values(project)
+    seen = set()
+    for name, where in env_users.items():
+      for v in envs.get(name, []):
+        yield from self._check_text(v, f"`{name}`, which feeds DatabaseSessionService at {where},", seen)
+    for v in cli_session_uris(project):
+      name = env_ref(v.text)
+      if name is None:
+        yield from self._check_text(v, "This `--session_service_uri`", seen, cli=True)
+      else:
+        for ev in envs.get(name, []):
+          yield from self._check_text(ev, f"`{name}`, passed to `--session_service_uri` in {v.rel},", seen, cli=True)
+
+  def _check_text(self, v: Value, subject: str, seen: set, cli: bool = False):
+    if (v.rel, v.line, v.start) in seen:
+      return
+    fix = sync_url_fix(v.text)
+    if fix is None or (cli and fix[0] == "sqlite"):
+      return  # the CLI sends bare sqlite:// to SqliteSessionService instead
+    seen.add((v.rel, v.line, v.start))
+    scheme, new_scheme = fix
+    replacement = None
+    if "?" not in v.text:
+      replacement = v.text.replace(f"{scheme}://", f"{new_scheme}://", 1)
+    yield self.text_finding(
+        v.rel,
+        v.line,
+        v.start,
+        f"{subject} uses the synchronous scheme `{scheme}://`. Since 1.19.0"
+        " DatabaseSessionService is fully async and fails at startup with it.",
+        f"use `{new_scheme}://` and add the `{new_scheme.split('+')[1]}`"
+        " package to your dependencies",
+        end_col=v.end,
+        replacement=replacement,
+        # A literal flag is certain; env files may be overridden at deploy time.
+        confidence="certain" if cli and subject.startswith("This") else "likely",
+    )
 
   def _check_value(self, m: Module, arg: cst.BaseExpression):
     expr, confidence = arg, "certain"
@@ -104,6 +157,19 @@ class AsyncDbUrl(Rule):
         replacement=replacement,
         fix_node=expr,
     )
+
+
+def _env_name(m: Module, expr: cst.BaseExpression) -> str | None:
+  """`os.getenv("X")`, `os.environ.get("X")` or `os.environ["X"]` -> "X"."""
+  if isinstance(expr, cst.Name) and m.assigns.get(expr.value) is not None:
+    expr = m.assigns[expr.value]
+  if isinstance(expr, cst.Call) and expr.args:
+    if m.qualname(expr.func) in ("os.getenv", "os.environ.get"):
+      return string_value(expr.args[0].value)
+  if isinstance(expr, cst.Subscript) and m.qualname(expr.value) == "os.environ":
+    if len(expr.slice) == 1 and isinstance(expr.slice[0].slice, cst.Index):
+      return string_value(expr.slice[0].slice.value)
+  return None
 
 
 def _db_url_arg(call: cst.Call) -> cst.BaseExpression | None:

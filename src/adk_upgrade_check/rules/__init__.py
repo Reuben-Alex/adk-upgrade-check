@@ -1,6 +1,7 @@
 """The rule registry, in release order. Add each new rule module here."""
 
 from .adk119_async_db_url import AsyncDbUrl
+from .adk119_sqlite_service import SqliteService
 from .adk200_direct_append import DirectAppend
 from .adk200_event_schema import EventSchema
 from .adk206_artifact_ns import ArtifactNamespace
@@ -14,6 +15,7 @@ from .base import Rule
 
 ALL_RULES: list[Rule] = [
     AsyncDbUrl(),
+    SqliteService(),
     DirectAppend(),
     EventSchema(),
     ArtifactNamespace(),
