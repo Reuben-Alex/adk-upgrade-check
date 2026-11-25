@@ -1,15 +1,38 @@
 [project]
 name = "adk-upgrade-check"
-version = "0.2.0"
+version = "0.2.1"
 description = "Find code that a Google ADK (google-adk) upgrade will break, before you upgrade."
 readme = "README.md"
 license = "Apache-2.0"
+authors = [{ name = "Reuben Alex" }]
 requires-python = ">=3.11"
+keywords = [
+  "google-adk", "adk", "agent-development-kit", "upgrade", "migration",
+  "breaking-changes", "static-analysis", "codemod", "libcst", "ai-agents",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
+]
 dependencies = [
   "libcst>=1.4",
   "packaging>=23",
   "pyyaml>=6",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Reuben-Alex/adk-upgrade-check"
+Issues = "https://github.com/Reuben-Alex/adk-upgrade-check/issues"
+Releases = "https://github.com/Reuben-Alex/adk-upgrade-check/releases"
 
 [project.scripts]
 adk-upgrade-check = "adk_upgrade_check.cli:main"
@@ -23,6 +46,9 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/adk_upgrade_check"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "LICENSE", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

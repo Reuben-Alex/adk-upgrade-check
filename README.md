@@ -9,7 +9,7 @@
 [![google-adk ≤ 2.15.1](https://img.shields.io/badge/google--adk-1.x%20%E2%86%92%202.15.1-4285F4?logo=google&logoColor=white)](#rules)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
 
-<img src="docs/demo.svg" alt="adk-upgrade-check reporting four breaking changes in a demo ADK project" width="860">
+<img src="https://raw.githubusercontent.com/Reuben-Alex/adk-upgrade-check/main/docs/demo.svg" alt="adk-upgrade-check reporting four breaking changes in a demo ADK project" width="860">
 
 </div>
 
